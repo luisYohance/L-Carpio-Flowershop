@@ -69,9 +69,22 @@ export default function ShopPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+<>
+<section
+        className="relative h-[200px] bg-cover bg-center opacity-90"
+        style={{ backgroundImage: 'url("/Pictures/Banner-1.jpg")' }}
+      >
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-4 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
+            Our Bouquets
+          </h1>
+          <p className="text-m text-white md:text-base">User / Shop</p>
+        </div>
+      </section>
+
+<div className="min-h-screen bg-gray-100 p-8">
+      
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Our Bouquets</h1>
         <p className="text-gray-800 m-2">All bouquets listed below are pre-made and ready for purchase.
           <br />
           Please refer to the <a href="/User/Contacts" className="text-blue-500 hover:underline">Contacts page</a> if you are interested in a custom bouquet.
@@ -125,5 +138,6 @@ export default function ShopPage() {
         ))}
       </div>
     </div>
+</>
   );
 }

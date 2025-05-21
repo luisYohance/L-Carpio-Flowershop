@@ -36,7 +36,7 @@ export function TopNav() {
               </SignedOut>
               <SignedIn>
               <SignOutButton>
-                <LogOut className="h-6 w-6 text-white" />
+                <LogOut className="h-6 w-6 text-black" />
               </SignOutButton>
             </SignedIn>
       </div>

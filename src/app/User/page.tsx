@@ -1,7 +1,13 @@
-import { Button } from "~/components/ui/button";
-import { SignInButton } from "@clerk/nextjs";
+'use client';
 
+import { Button } from "~/components/ui/button";
+import { SignedIn, SignedOut, SignInButton, useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 export default function LandingPage() {
+  const router = useRouter();
+  const { user } = useUser();
+
   return (
     <div className="bg-zinc-50 font-sans text-[#333]">
       {/* Hero Section */}
@@ -13,11 +19,18 @@ export default function LandingPage() {
           <h1 className="mb-6 text-4xl font-bold text-white md:text-6xl">
             Gorgeous Flowers for Your Special Event
           </h1>
+          <SignedOut>
           <SignInButton>
             <Button className="rounded bg-[#f6a29d] px-6 py-3 font-semibold text-white hover:bg-[#e69087]">
               Sign In!
             </Button>
           </SignInButton>
+          </SignedOut>
+          <SignedIn>
+          <Button onClick={() => router.push('/User/Shop')} className="rounded bg-[#f6a29d] px-6 py-3 font-semibold text-white hover:bg-[#e69087]">
+              Go to Shop!
+            </Button>
+          </SignedIn>
         </div>
       </section>
 

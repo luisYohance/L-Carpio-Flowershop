@@ -13,7 +13,7 @@ export default function ChurchEventsPage() {
             Church Arrangements
           </h1>
           <p className="text-m text-white md:text-base">
-            Home / Services / Church Arrangements
+            User / Services / Church Arrangements
           </p>
         </div>
       </section>

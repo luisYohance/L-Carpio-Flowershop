@@ -13,7 +13,7 @@ export default function FuneralPage() {
             Funeral Arrangements
           </h1>
           <p className="text-m text-white md:text-base">
-            Home / Services / Funeral Arrangements
+            User / Services / Funeral Arrangements
           </p>
         </div>
       </section>

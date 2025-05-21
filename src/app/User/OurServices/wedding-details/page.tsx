@@ -13,7 +13,7 @@ export default function WeddingPage() {
             Wedding Arrangements
           </h1>
           <p className="text-m text-white md:text-base">
-            Home / Services / Wedding Arrangements
+            User / Services / Wedding Arrangements
           </p>
         </div>
       </section>

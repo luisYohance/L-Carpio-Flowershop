@@ -39,7 +39,7 @@ export default function Services() {
           <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
             Our Services
           </h1>
-          <p className="text-m text-white md:text-base">Home / Services</p>
+          <p className="text-m text-white md:text-base">User / Services</p>
         </div>
       </section>
 
