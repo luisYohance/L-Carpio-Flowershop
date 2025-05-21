@@ -1,0 +1,221 @@
+{
+  "id": "a386b078-631a-44c5-81a9-907ccbdba314",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.dyiflowershop_bouquet_consumables": {
+      "name": "dyiflowershop_bouquet_consumables",
+      "schema": "",
+      "columns": {
+        "bouquet_id": {
+          "name": "bouquet_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "consumable_name": {
+          "name": "consumable_name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "dyiflowershop_bouquet_consumables_bouquet_id_consumable_name_pk": {
+          "name": "dyiflowershop_bouquet_consumables_bouquet_id_consumable_name_pk",
+          "columns": [
+            "bouquet_id",
+            "consumable_name"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dyiflowershop_bouquet_flowers": {
+      "name": "dyiflowershop_bouquet_flowers",
+      "schema": "",
+      "columns": {
+        "bouquet_id": {
+          "name": "bouquet_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "flower_name": {
+          "name": "flower_name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "dyiflowershop_bouquet_flowers_bouquet_id_flower_name_pk": {
+          "name": "dyiflowershop_bouquet_flowers_bouquet_id_flower_name_pk",
+          "columns": [
+            "bouquet_id",
+            "flower_name"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dyiflowershop_bouquets": {
+      "name": "dyiflowershop_bouquets",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "dyiflowershop_bouquets_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "label": {
+          "name": "label",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image": {
+          "name": "image",
+          "type": "varchar(1024)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dyiflowershop_row_bouquets": {
+      "name": "dyiflowershop_row_bouquets",
+      "schema": "",
+      "columns": {
+        "row_id": {
+          "name": "row_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bouquet_id": {
+          "name": "bouquet_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "dyiflowershop_row_bouquets_row_id_bouquet_id_pk": {
+          "name": "dyiflowershop_row_bouquets_row_id_bouquet_id_pk",
+          "columns": [
+            "row_id",
+            "bouquet_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dyiflowershop_rows": {
+      "name": "dyiflowershop_rows",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "dyiflowershop_rows_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
