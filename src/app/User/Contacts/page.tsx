@@ -24,7 +24,7 @@ export default function Contact() {
         <div className="mx-auto mb-16 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
           <div className="rounded-md bg-[#f1f5f4] p-8">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#a6c48a]">
-              <MapPin />
+              <MapPin className="h-6 w-6 text-white" />
             </div>
             <h3 className="mb-2 font-semibold tracking-widest text-gray-800">
               ADDRESS
@@ -43,7 +43,7 @@ export default function Contact() {
             <h3 className="mb-2 font-semibold tracking-widest text-gray-800">
               PHONE
             </h3>
-            <p className="text-sm text-pink-500">0967 360 8776</p>
+            <p className="text-sm leading-tight text-gray-60">0967 360 8776</p>
           </div>
 
           <div className="rounded-md bg-[#f1f5f4] p-8">
@@ -53,11 +53,11 @@ export default function Contact() {
             <h3 className="mb-2 font-semibold tracking-widest text-gray-800">
               EMAIL ADDRESS
             </h3>
-            <p className="text-sm text-pink-500">lcarpiocfs@gmail.com</p>
+            <p className="text-sm leading-tight text-gray-60">lcarpiocfs@gmail.com</p>
           </div>
         </div>
 
-        {/* Contact Form */}
+        {/* Contact Form 
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="mb-2 text-2xl font-semibold text-gray-800 md:text-3xl">
             Have a Question?
@@ -102,6 +102,7 @@ export default function Contact() {
             </button>
           </form>
         </div>
+        */}
       </section>
     </div>
   );

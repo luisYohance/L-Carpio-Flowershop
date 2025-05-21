@@ -1,6 +1,7 @@
 import { Button } from "~/components/ui/button";
+import { SignInButton } from "@clerk/nextjs";
 
-export default function HomePage() {
+export default function LandingPage() {
   return (
     <div className="bg-zinc-50 font-sans text-[#333]">
       {/* Hero Section */}
@@ -12,11 +13,11 @@ export default function HomePage() {
           <h1 className="mb-6 text-4xl font-bold text-white md:text-6xl">
             Gorgeous Flowers for Your Special Event
           </h1>
-          <a href="/User/Shop">
+          <SignInButton>
             <Button className="rounded bg-[#f6a29d] px-6 py-3 font-semibold text-white hover:bg-[#e69087]">
-              Shop Now
+              Sign In!
             </Button>
-          </a>
+          </SignInButton>
         </div>
       </section>
 

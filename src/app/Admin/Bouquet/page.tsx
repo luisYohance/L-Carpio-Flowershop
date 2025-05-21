@@ -64,7 +64,7 @@ export default function BouquetPage() {
       className="relative border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer bg-white"
     >
       <button
-        className="absolute top-2 right-2 text-white bg-black/40 hover:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold"
+        className="absolute top-2 right-2 text-white bg-black/40 hover:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold"
         onClick={() => {
           const newRows = [...(bouquetRows.value || [])];
           const index = newRows[rowIndex]?.items?.indexOf(bouquet);
@@ -103,9 +103,9 @@ export default function BouquetPage() {
   const addRow = (row: Row, rowIndex: number) => (
     <div key={rowIndex} className="w-full max-w-5xl" data-id="row">
       <div className="inline-block align-middle w-full m-2">
-        <h2 className="text-lg font-semibold float-left">{row.title}</h2>
+        <h2 className="text-lg text-white font-semibold float-left">{row.title}</h2>
         <button
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold p-2 m-2 rounded w-auto float-right"
+          className="bg-gray-100 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded w-auto float-right mx-2"
           onClick={async () => {
             try {
               console.log('Attempting to delete row:', row);
@@ -174,7 +174,7 @@ export default function BouquetPage() {
             newRows[rowIndex].items.push(item);
             bouquetRows.set(newRows);
           }}
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold p-2 m-2 rounded w-auto float-right"
+          className="bg-gray-100 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded w-auto float-right mx-2"
         >
           Add Item
         </button>
@@ -197,7 +197,7 @@ export default function BouquetPage() {
               console.log('Row not found for renaming');
             }
           }}
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold p-2 m-2 rounded w-auto float-right"
+          className="bg-gray-100 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded w-auto float-right mx-2"
         >
           Rename Row
         </button>
@@ -223,7 +223,7 @@ export default function BouquetPage() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100 text-gray-900 p-6 space-x-6">
+    <div className="flex h-screen bg-gray-100 bg-gradient-to-b from-[#454446] to-[#1d1d22] p-6 space-x-6">
       <div className="flex-1 flex flex-col items-center space-y-8" id="rowsSpace">
         {rows.map((row, rowIndex) => addRow(row, rowIndex))}
       </div>
@@ -239,7 +239,7 @@ export default function BouquetPage() {
             newRows.push(row);
             bouquetRows.set(newRows);
           }}
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded w-auto"
+          className="bg-gray-100 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded w-auto"
         >
           Add Row
         </button>
@@ -282,7 +282,7 @@ export default function BouquetPage() {
               alert(err instanceof Error ? err.message : "Failed to save bouquets to database");
             }
           }}
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded w-auto"
+          className="bg-gray-100 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded w-auto"
         >
           Save to DB
         </button>
@@ -305,7 +305,7 @@ export default function BouquetPage() {
               alert("Failed to load bouquets from server");
             }
           }}
-          className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded w-auto"
+          className="bg-gray-100 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded w-auto"
         >
           Load from DB
         </button>

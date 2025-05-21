@@ -39,6 +39,8 @@ export default function FlowersPage() {
         },
         body: JSON.stringify(newFlower),
       });
+      const data = await res.json();
+      alert(data.message);
 
       if (!res.ok) throw new Error("Failed to add flower");
       
@@ -47,6 +49,31 @@ export default function FlowersPage() {
     } catch (err) {
       console.error("Error adding flower:", err);
       alert("Failed to add flower. Please try again.");
+    }
+  };
+
+  const takeFlower = async () => {
+    if (!newFlower.name || newFlower.quantity < 0) {
+      alert("Please enter a valid flower name and quantity");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/flowers/take", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newFlower),
+      });
+const data = await res.json();
+      alert(data.message);
+      if (!res.ok) throw new Error("Failed to take flower");
+      setNewFlower({ name: '', quantity: 0 });
+      await loadFlowers();
+    } catch (err) {
+      console.error("Error taking flower:", err);
+      alert("Failed to take flower. Please try again.");
     }
   };
 
@@ -83,9 +110,9 @@ export default function FlowersPage() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100 text-gray-900 p-6">
+    <div className="flex h-screen bg-gray-100 text-gray-900 p-6 bg-gradient-to-b from-[#454446] to-[#1d1d22]">
       <div className="w-full max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Flower Management</h1>
+        <h1 className="text-3xl font-bold mb-8 text-white">Flower Management</h1>
         
         {/* Add new flower form */}
         <div className="bg-gray-500 p-6 rounded-lg shadow-md mb-8">
@@ -111,6 +138,12 @@ export default function FlowersPage() {
               className="bg-gray-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded"
             >
               Add Flower
+            </button>
+            <button
+              onClick={takeFlower}
+              className="bg-gray-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded"
+            >
+              Take Flower
             </button>
           </div>
         </div>

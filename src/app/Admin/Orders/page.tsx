@@ -7,9 +7,12 @@ interface Order {
   user_email: string;
   total_price: number;
   items: Array<{
+    id: number;
     label: string;
     price: number;
     quantity: number;
+    flowers: {[key: string]: number};
+    consumables: string[];
     image: string;
   }>;
   status: string;
@@ -53,6 +56,39 @@ export default function OrderPage() {
   }, []);
 
   const handleStatusUpdate = async (orderId: number, newStatus: string) => {
+      const bouqRes = await fetch('/api/bouquets/load');
+      const toset : {name: string, quantity: number}[] = [];
+
+      if (!bouqRes.ok) throw new Error('Failed to fetch bouquets');
+      const bouqRows = await bouqRes.json();
+    
+      orders.find(order => order.id === orderId)?.items.forEach(async (item) => {
+        bouqRows.forEach((bouqRow: any) => {
+          const bouqItem = bouqRow.items.find((bouqItem: any) => bouqItem.id === item.id);
+          if (bouqItem && bouqItem.flowers) {
+            Object.entries(bouqItem.flowers).forEach(([flowerName, flowerQuantity]) => {
+              toset.push({name : flowerName, quantity : flowerQuantity*item.quantity});
+            });
+          }
+
+        });
+      });
+      
+      if (newStatus == 'accepted') {
+        const res = await fetch("/api/flowers/take", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(toset),
+        });
+        const data = await res.json();
+        alert(data.message);
+        if (data.success == 'false') {
+          return;
+        }
+      }
+    
     try {
       const response = await fetch(`/api/orders/${orderId}/update-status`, {
         method: "PATCH",
@@ -70,6 +106,8 @@ export default function OrderPage() {
       setOrders(orders.map(order => 
         order.id === orderId ? { ...order, status: newStatus } : order
       ));
+      
+
     } catch (err) {
       console.error("Error updating order status:", err);
       alert("Failed to update order status. Please try again.");

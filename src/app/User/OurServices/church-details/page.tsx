@@ -54,7 +54,7 @@ export default function ChurchEventsPage() {
             style={{ backgroundImage: 'url("/Pictures/Church-designs.jpg")' }}
           >
             <div className="absolute inset-0 flex items-center justify-center rounded bg-black/40">
-              <a href="/Contacts">
+              <a href="/User/Contacts">
                 <button className="bg-opacity-70 hover:bg-opacity-90 rounded bg-green-700 px-6 py-3 font-semibold text-white shadow-lg hover:bg-green-800">
                   Contact Us for Church Event Services
                 </button>
