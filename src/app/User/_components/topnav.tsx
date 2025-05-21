@@ -1,23 +1,45 @@
+import { SignInButton } from "@clerk/nextjs";
+
+import { SignedOut } from "@clerk/nextjs";
+
+import { SignOutButton } from "@clerk/nextjs";
+
+import { SignedIn } from "@clerk/nextjs";
+import { LogOut } from "lucide-react";
+
 export function TopNav() {
   return (
-    <nav className="bg-green-300 py-6">
-      <ul className="text-m flex justify-center space-x-9 font-bold text-gray-800">
-        <li className="hover:underline">
-          <a href="/User">HOME</a>
-        </li>
-        <li className="hover:underline">
-          <a href="/User/Shop">SHOP</a>
-        </li>
-        <li className="hover:underline">
-          <a href="/User/OurServices">SERVICES</a>
-        </li>
-        <li className="hover:underline">
-          <a href="/User/Flowers">FLOWERS</a>
-        </li>
-        <li className="hover:underline">
-          <a href="/User/Contacts">CONTACTS</a>
-        </li>
-      </ul>
+    
+    <nav className=" sticky top-0 z-50 w-full flex items-center justify-between p-4 text-black font-bold bg-green-300">
+
+      <div className="flex gap-4 list-none">
+                <div className="relative group">
+                    <a href="/User" className="text-black px-4 py-2 hover:underline">HOME</a>
+                </div>
+                <div className="relative group">
+                    <a href="/User/Shop" className="text-black px-4 py-2 hover:underline">SHOP</a>
+                </div>
+                <div className="relative group">
+                    <a href="/User/OurServices" className="text-black px-4 py-2 hover:underline">SERVICES</a>
+                </div>
+                <div className="relative group">
+                    <a href="/User/Flowers" className="text-black px-4 py-2 hover:underline">FLOWERS</a>
+                </div>
+                <div className="relative group">
+                    <a href="/User/Contacts" className="text-black px-4 py-2 hover:underline">CONTACTS</a>
+                </div>
+      </div>
+
+      <div className="flex gap-2">
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+              <SignOutButton>
+                <LogOut className="h-6 w-6 text-white" />
+              </SignOutButton>
+            </SignedIn>
+      </div>
     </nav>
   );
 }

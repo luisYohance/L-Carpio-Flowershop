@@ -6,6 +6,7 @@ interface Order {
   id: number;
   user_email: string;
   total_price: number;
+  proof_of_payment: string;
   items: Array<{
     id: number;
     label: string;
@@ -188,7 +189,10 @@ export default function OrderPage() {
               <span className="font-semibold">Order Date:</span>{" "}
               {new Date(order.created_at).toLocaleDateString()}
             </p>
-
+            <div className="flex flex-col gap-2">
+              <p className="font-semibold">Proof of Payment:</p>
+              <img src={order.proof_of_payment} alt="Proof of Payment" className="max-h-30 max-w-30" />
+            </div>
             <div className="flex gap-4 mt-6">
               {order.status === 'pending' && (
                 <>

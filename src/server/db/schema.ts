@@ -54,6 +54,7 @@ export const orders = pgTable("dyiflowershop_orders", {
   id: serial("id").primaryKey(),
   user_email: varchar("user_email", { length: 256 }).notNull(),
   total_price: real("total_price").notNull(),
+  proof_of_payment: text("proof_of_payment").notNull(),
   items: jsonb("items").notNull(),
   status: varchar("status", { length: 50 }).notNull().default("pending"),
   created_at: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

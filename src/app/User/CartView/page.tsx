@@ -7,15 +7,23 @@ import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { UploadDialog } from '~/app/Admin/_components/uploadDialog';
 
 export default function CartView() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart();
   const { user } = useUser();
   const router = useRouter();
+  const [proofOfPayment, setProofOfPayment] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleConfirmOrder = async () => {
+
+    if (proofOfPayment == null) {
+      setError("Please upload a proof of payment");
+      return;
+    }
+
     if (!user?.emailAddresses?.[0]?.emailAddress) {
       setError("Please sign in to place an order");
       return;
@@ -34,6 +42,7 @@ export default function CartView() {
       const orderData = {
         userEmail: user.emailAddresses[0].emailAddress,
         totalPrice: total + 50, // Include shipping cost
+        proofOfPayment: proofOfPayment,
         items: items.map(item => ({
           id: item.id,
           label: item.label,
@@ -63,7 +72,7 @@ export default function CartView() {
         throw new Error(errorMessage);
       }
 
-      alert("Order placed successfully!");
+      alert("Order placed successfully! You will be notified via E-MAIL once it is accepted.");
       clearCart();
       router.push("/User/Shop");
     } catch (error) {
@@ -176,6 +185,19 @@ export default function CartView() {
               <span>Total:</span>
               <span className="text-rose-500">₱{(total + 50).toFixed(2)}</span>
             </div>
+            <div className="flex justify-between py-1 font-bold">
+              <span>Input Proof of Payment:</span>
+              <img src={proofOfPayment || null} alt="Proof of Payment Here" className="max-h-50" />
+              <UploadDialog 
+                onImageUpload={(url) => {
+                console.log('Setting temp image to:', url);
+                setProofOfPayment(url);
+              }} 
+             />
+            </div>
+
+            
+
             <button
               onClick={handleConfirmOrder}
               disabled={isSubmitting}

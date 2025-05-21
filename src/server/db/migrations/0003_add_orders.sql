@@ -6,6 +6,7 @@ CREATE TABLE dyiflowershop_orders (
     id SERIAL PRIMARY KEY,
     user_email VARCHAR(256) NOT NULL,
     total_price REAL NOT NULL,
+    proof_of_payment TEXT NOT NULL,
     items JSONB NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'pending',
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -1,5 +1,5 @@
-import { SignedOut, SignInButton } from "@clerk/nextjs";
-
+import { SignedOut, SignedIn, SignInButton, SignOutButton } from "@clerk/nextjs";
+import { LogOut } from "lucide-react";
 export function TopNav() {
     return (
         <nav className="sticky top-0 z-50 w-full flex items-center justify-between p-4 bg-black text-white">
@@ -21,6 +21,11 @@ export function TopNav() {
                 <SignedOut>
                     <SignInButton />
                 </SignedOut>
+                <SignedIn>
+                    <SignOutButton>
+                        <LogOut className="h-6 w-6 text-white" />
+                    </SignOutButton>
+                </SignedIn>
             </div>
         </nav>
     );

@@ -1,27 +1,31 @@
-import React from "react";
-
-const bouquets = [
-  {
-    id: 1,
-    name: "Bouquet 1",
-    quantity: 1,
-    image: "/Pictures/lily-casa.jpg",
-  },
-  {
-    id: 2,
-    name: "Bouquet 2",
-    quantity: 1,
-    image: "/Pictures/rose-chinese.jpg",
-  },
-  {
-    id: 3,
-    name: "Bouquet 3",
-    quantity: 1,
-    image: "/Pictures/rose-legendary.jpg",
-  },
-];
+'use client';
+import React, { useEffect, useState } from "react";
 
 export default function FlowerPage() {
+  const [flowerList, setFlowerList] = useState<{ id: number; name: string; quantity: number }[]>([]);
+  const [newFlower, setNewFlower] = useState({ name: '', quantity: 0 });
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadFlowers();
+  }, []);
+
+  const loadFlowers = async () => {
+    try {
+      const res = await fetch("/api/flowers/load");
+      if (!res.ok) throw new Error("Failed to fetch flowers");
+      const data = await res.json();
+      setFlowerList(data);
+    } catch (err) {
+      console.error("Error loading flowers:", err);
+      setError("Failed to load flowers. Please try again later.");
+    }
+  }
+
+  if (flowerList===null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <section
@@ -30,35 +34,37 @@ export default function FlowerPage() {
       >
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-4 text-center">
           <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
-            Shop
+            Flowers
           </h1>
-          <p className="text-m text-white md:text-base">Home / Shop</p>
+          <p className="text-m text-white md:text-base">User / Flowers</p>
         </div>
       </section>
 
       <div className="mx-auto max-w-5xl p-6">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-          {bouquets.map(({ id, name, quantity, image }) => (
-            <div
-              key={id}
-              className="grid grid-cols-2 items-center gap-6 rounded-lg bg-white p-6 shadow-sm"
-            >
-              <img
-                src={image}
-                alt={name}
-                className="h-40 w-full rounded-lg object-cover shadow-md"
-              />
-
-              <div className="flex flex-col items-start space-y-2 text-sm md:text-base">
-                <p className="font-semibold text-gray-800">{name}</p>
-
-                <div className="flex w-28 items-center justify-center rounded-lg border px-4 py-1">
-                  <span className="font-semibold">Quantity: {quantity}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <p className="text-gray-800 m-2">Lcarpio's Flowershop has a wide array of flowers in stock. 
+          <br />
+          Please refer to this page when considering the availability of your order.
+          <br />
+          <br />
+          Listed below are the flowers and their current stock.
+        </p>
+        <table className="w-full border-collapse border border-black">
+  <thead>
+    <tr>
+      <th className="bg-gray-400 p-2">Flower</th>
+      <th className="bg-gray-400 p-2">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {flowerList.map(({ id, name, quantity }) => (
+      <tr key={id}>
+        <td className="font-semibold bg-gray-300 p-4 border border-black">{name}</td>
+        <td className="bg-gray-300 p-4 border border-black">{quantity} in stock</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+          
       </div>
     </div>
   );

@@ -16,13 +16,13 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log('Received order data:', JSON.stringify(body, null, 2));
 
-    const { userEmail, totalPrice, items } = body;
+    const { userEmail, totalPrice, proofOfPayment, items } = body;
 
-    if (!userEmail || !totalPrice || !items) {
-      console.error('Missing required fields:', { userEmail, totalPrice, items });
+    if (!userEmail || !totalPrice || !proofOfPayment || !items) {
+      console.error('Missing required fields:', { userEmail, totalPrice, proofOfPayment, items });
       return NextResponse.json({ 
         error: 'Missing required fields',
-        details: { userEmail, totalPrice, items }
+        details: { userEmail, totalPrice, proofOfPayment, items }
       }, { status: 400 });
     }
 
@@ -48,6 +48,7 @@ export async function POST(req: Request) {
       const order = await db.insert(orders).values({
         user_email: userEmail,
         total_price: totalPrice,
+        proof_of_payment: proofOfPayment,
         items: items,
         status: 'pending'
       }).returning();

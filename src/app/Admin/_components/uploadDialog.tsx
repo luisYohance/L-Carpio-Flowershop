@@ -140,10 +140,7 @@ export function UploadDialog({ onImageUpload }: { onImageUpload?: (imageUrl: str
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Upload Bouquet Image</DialogTitle>
-          <DialogDescription>
-            Upload an image for your bouquet. Click submit when you're done.
-          </DialogDescription>
+          <DialogTitle>Upload Image</DialogTitle>
         </DialogHeader>
         {/* Upload Button */}
         <div className="flex flex-col gap-2">

@@ -223,7 +223,7 @@ export default function BouquetPage() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100 bg-gradient-to-b from-[#454446] to-[#1d1d22] p-6 space-x-6">
+    <div className="flex min-h-screen bg-gray-100 bg-gradient-to-b from-[#454446] to-[#1d1d22] p-6 space-x-6">
       <div className="flex-1 flex flex-col items-center space-y-8" id="rowsSpace">
         {rows.map((row, rowIndex) => addRow(row, rowIndex))}
       </div>

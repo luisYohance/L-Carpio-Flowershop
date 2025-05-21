@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { flowers } from "~/server/db/schema";
-import { db } from "~/server/db";
 
 export default function FlowersPage() {
   const [flowerList, setFlowerList] = useState<{ id: number; name: string; quantity: number }[]>([]);
@@ -100,7 +98,7 @@ const data = await res.json();
 
   if (error) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="flex min-h-screen items-center justify-center bg-gray-100">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
           <p className="text-gray-700">{error}</p>
@@ -110,7 +108,7 @@ const data = await res.json();
   }
 
   return (
-    <div className="flex h-screen bg-gray-100 text-gray-900 p-6 bg-gradient-to-b from-[#454446] to-[#1d1d22]">
+    <div className="flex min-h-screen bg-gray-100 text-gray-900 p-6 bg-gradient-to-b from-[#454446] to-[#1d1d22]">
       <div className="w-full max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-white">Flower Management</h1>
         

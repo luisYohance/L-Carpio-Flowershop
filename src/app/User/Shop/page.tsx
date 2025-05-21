@@ -72,7 +72,10 @@ export default function ShopPage() {
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">Our Bouquets</h1>
-        
+        <p className="text-gray-800 m-2">All bouquets listed below are pre-made and ready for purchase.
+          <br />
+          Please refer to the <a href="/User/Contacts" className="text-blue-500 hover:underline">Contacts page</a> if you are interested in a custom bouquet.
+        </p>
         {rows.map((row) => (
           <div key={row.id} className="mb-12">
             <h2 className="text-2xl font-semibold mb-6">{row.title}</h2>

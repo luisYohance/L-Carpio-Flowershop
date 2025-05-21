@@ -4,9 +4,7 @@ import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 import { TopNav } from "./_components/topnav";
 import { Footer } from "./_components/footer";
-import { ClerkProvider } from "@clerk/nextjs";
 import { CartProvider } from "../context/CartContext";
-import { SignOutButton } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Lcarpio's Flower Shop",
@@ -26,13 +24,6 @@ export default function AdminLayout({
     <CartProvider>
       <div className="relative min-h-screen">
         <TopNav />
-        <div className="absolute right-4 top-4 z-50">
-          <SignOutButton>
-            <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
-              Sign Out
-            </button>
-          </SignOutButton>
-        </div>
         {children}
         <Footer />
       </div>

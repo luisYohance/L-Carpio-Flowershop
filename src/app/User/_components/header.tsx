@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "~/app/context/CartContext";
 
@@ -34,8 +34,6 @@ export function Header() {
               <p className="font-semibold">₱{total.toFixed(2)}</p>
             </div>
           </Link>
-
-          <LogOut />
         </div>
       </div>
     </header>

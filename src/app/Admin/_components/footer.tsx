@@ -1,6 +1,6 @@
 export function Footer() {
     return (
-        <footer className="bg-black text-white">
+        <footer className="relative bottom-0 w-full bg-black text-white">
             <div className="max-w mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div className="text-center pt-3">
