@@ -5,8 +5,8 @@ export function Footer() {
                 
                 <div className="text-center pt-3">
                     <h3>Contact Us</h3>
-                    <p>Email: example@flowershop.com</p>
-                    <p>Phone: +123 456 7890</p>
+                    <p>Email: lcarpiocfs@gmail.com</p>
+                    <p>Phone: 0967 360 8776</p>
                 </div>
         
                 <div className="pt-6 text-center">

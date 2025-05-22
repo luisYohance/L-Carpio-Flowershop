@@ -85,7 +85,7 @@ export default function BouquetPage() {
           }
         }}
       >
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center m-2">
           <img
             src={bouquet.image || "/placeholder-image.png"}
             alt={bouquet.label}

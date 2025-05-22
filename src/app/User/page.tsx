@@ -96,11 +96,13 @@ export default function LandingPage() {
       {/* About Section */}
       <section className="w-full bg-white px-6 py-12 text-black">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 md:flex-row">
-          <img
-            src="/Pictures/Lcarpio-logo.jpg"
-            alt="About"
-            className="h-80 w-full max-w-md rounded-md object-cover md:w-1/2"
-          />
+        <div className="mb-4 flex aspect-square h-40 w-80 items-center justify-center overflow-hidden rounded-full bg-white">
+                <img
+                  src="/Pictures/Lcarpio-logo.jpg"
+                  alt="FlowerShop Logo"
+                  className="h-32 w-32 object-contain"
+                />
+              </div>
           <div>
             <h2 className="mb-4 text-2xl font-semibold">
               Welcome to Lcarpio's Flower Shop
@@ -117,11 +119,13 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="w-full bg-white py-10 text-center">
-        <img
-          src="/Pictures/Lcarpio-logo.jpg"
-          alt="Lcarpio Logo"
-          className="mx-auto h-20"
-        />
+         <div className="mb-4 flex aspect-square h-20 w-40 items-center justify-center overflow-hidden rounded-full bg-white">
+                <img
+                  src="/Pictures/Lcarpio-logo.jpg"
+                  alt="FlowerShop Logo"
+                  className="h-18 w-18 object-contain"
+                />
+          </div>
         <div className="mt-6 flex justify-center space-x-4">
           <a
             href="https://www.facebook.com/profile.php?id=100075981939873"

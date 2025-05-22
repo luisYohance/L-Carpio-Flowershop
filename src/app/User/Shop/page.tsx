@@ -24,6 +24,7 @@ export default function ShopPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { addItem } = useCart();
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   useEffect(() => {
     loadBouquets();
@@ -70,6 +71,20 @@ export default function ShopPage() {
 
   return (
     <>
+      {/* Preview Image Modal */}
+      {previewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+          onClick={() => setPreviewImage(null)}
+        >
+          <img
+            src={previewImage}
+            alt="Preview"
+            className="max-h-[70%] max-w-[70%] rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+    
       {/* Banner Section */}
       <section
         className="relative h-[200px] bg-cover bg-center opacity-90"
@@ -106,15 +121,15 @@ export default function ShopPage() {
           {rows.map((row) => (
             <div key={row.id} className="mb-12">
               {/* Row Title with semi-transparent background */}
-              <div className="relative mb-6 overflow-hidden rounded-md text-center text-2xl font-semibold text-white">
+              <div className="relative mb-6 overflow-hidden rounded-md text-center border-4 border-pink-600 bg-pink-600">
                 {/* Background Image Layer */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-90"
+                  className="absolute inset-0 bg-cover bg-center opacity-75"
                   style={{ backgroundImage: 'url("/Pictures/Banner-5.jpg")' }}
                   aria-hidden="true"
                 />
                 {/* Foreground Text */}
-                <div className="relative z-10 px-6 py-4">{row.title}</div>
+                <div className="font-bold text-2xl relative inline-block m-2 z-10 px-6 py-4 rounded bg-pink-600 text-white border-3 border-white">{row.title}</div>
               </div>
 
               {/* Bouquets Grid */}
@@ -125,11 +140,13 @@ export default function ShopPage() {
                     className="w-[280px] rounded-lg bg-white shadow-md transition-transform hover:scale-105"
                   >
                     <div className="relative h-48 w-full">
+                      
                       <Image
                         src={bouquet.image}
                         alt={bouquet.label}
                         fill
-                        className="rounded-t-lg object-cover"
+                        className="rounded-t-lg object-cover cursor-pointer"
+                        onClick={() => setPreviewImage(bouquet.image)}
                       />
                     </div>
                     <div className="p-4">
@@ -139,7 +156,13 @@ export default function ShopPage() {
                       <p className="mb-2 text-gray-600">
                         ₱{bouquet.price.toFixed(2)}
                       </p>
-
+                    {/* Add to Cart Button */}
+                    <button
+                        onClick={() => handleAddToCart(bouquet)}
+                        className="w-full rounded bg-pink-600 px-4 py-2 mb-5 text-white transition-colors hover:bg-pink-700"
+                      >
+                        Add to Cart
+                      </button>
                       {/* Flowers List */}
                       <div className="mb-3">
                         <h4 className="text-sm font-medium">Flowers:</h4>
@@ -164,13 +187,7 @@ export default function ShopPage() {
                         </ul>
                       </div>
 
-                      {/* Add to Cart Button */}
-                      <button
-                        onClick={() => handleAddToCart(bouquet)}
-                        className="w-full rounded bg-pink-600 px-4 py-2 text-white transition-colors hover:bg-pink-700"
-                      >
-                        Add to Cart
-                      </button>
+                      
                     </div>
                   </div>
                 ))}

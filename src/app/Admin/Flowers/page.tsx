@@ -7,6 +7,7 @@ export default function FlowersPage() {
   const [flowerList, setFlowerList] = useState<
     { id: number; name: string; quantity: number; image: string }[]
   >([]);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [newFlower, setNewFlower] = useState({ name: "", quantity: 0 });
   const [error, setError] = useState<string | null>(null);
 
@@ -135,6 +136,21 @@ export default function FlowersPage() {
   }
 
   return (
+    <>
+    {/* Preview Image Modal */}
+{previewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+          onClick={() => setPreviewImage(null)}
+        >
+          <img
+            src={previewImage}
+            alt="Preview"
+            className="max-h-[70%] max-w-[70%] rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+      
     <div className="flex min-h-screen bg-gray-100 bg-gradient-to-b from-[#454446] to-[#1d1d22] p-6 text-gray-900">
       <div className="mx-auto w-full max-w-4xl">
         <h1 className="mb-8 text-3xl font-bold text-white">
@@ -195,10 +211,11 @@ export default function FlowersPage() {
                   <p className="text-gray-600">Quantity: {flower.quantity}</p>
                   <p className="text-gray-600">Image:</p>
                   <img
-                    src={flower.image}
-                    alt={`Image of ${flower.name}`}
-                    className="h-20 w-20"
-                  />
+                      src={flower.image}
+                      alt={flower.name}
+                      className="h-20 w-20 cursor-pointer rounded-md object-cover transition hover:scale-105"
+                      onClick={() => setPreviewImage(flower.image)}
+                    />
                 </div>
                 <button
                   onClick={() => deleteFlower(flower.name)}
@@ -218,5 +235,6 @@ export default function FlowersPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

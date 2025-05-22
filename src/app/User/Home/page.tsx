@@ -25,11 +25,13 @@ export default function LandingPage() {
       {/* About Section */}
       <section className="bg-zinc-100 px-6 py-16">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 md:flex-row">
-          <img
-            src="/Pictures/Lcarpio-logo.jpg"
-            alt="About"
-            className="rounded-m h-80 md:w-1/2"
-          />
+          <div className="mb-4 flex aspect-square h-40 w-80 items-center justify-center overflow-hidden rounded-full bg-white">
+                <img
+                  src="/Pictures/Lcarpio-logo.jpg"
+                  alt="FlowerShop Logo"
+                  className="h-32 w-32 object-contain"
+                />
+              </div>
           <div>
             <h2 className="mb-4 text-2xl font-semibold">
               Welcome to Lcarpio's Flower Shop

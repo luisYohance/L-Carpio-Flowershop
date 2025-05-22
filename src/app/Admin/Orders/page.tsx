@@ -1,5 +1,6 @@
 "use client";
 
+import image from "next/image";
 import { useEffect, useState } from "react";
 import { sendEmail } from "~/lib/resend";
 
@@ -24,7 +25,7 @@ interface Order {
 export default function OrderPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [error, setError] = useState<string | null>(null);
-
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const handleCloseOrder = async (orderId: number) => {
     try {
       const response = await fetch(`/api/orders/${orderId}/delete`, {
@@ -131,6 +132,22 @@ export default function OrderPage() {
   }
 
   return (
+<>
+{/* Preview Image Modal */}
+{previewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+          onClick={() => setPreviewImage(null)}
+        >
+          <img
+            src={previewImage}
+            alt="Preview"
+            className="max-h-[70%] max-w-[70%] rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+
+
     <main className="flex min-h-screen flex-col items-center justify-start bg-gradient-to-b from-[#454446] to-[#1d1d22] text-white px-4 py-8 space-y-6">
       <h1 className="text-3xl font-bold mb-8">Orders</h1>
       
@@ -163,11 +180,14 @@ export default function OrderPage() {
             <div className="space-y-4">
               {order.items.map((item, index) => (
                 <div key={index} className="flex items-center gap-4 border-t border-white/20 pt-4">
+
                   <img
                     src={item.image}
                     alt={item.label}
-                    className="w-20 h-20 rounded object-cover"
+                    className="h-20 w-20 cursor-pointer rounded-md object-cover transition hover:scale-105"
+                    onClick={() => setPreviewImage(item.image)}
                   />
+
                   <div className="flex-1">
                     <p className="font-semibold">{item.label}</p>
                     <p className="text-gray-300">₱{item.price.toFixed(2)} × {item.quantity}</p>
@@ -195,7 +215,12 @@ export default function OrderPage() {
             </p>
             <div className="flex flex-col gap-2">
               <p className="font-semibold">Proof of Payment:</p>
-              <img src={order.proof_of_payment} alt="Proof of Payment" className="max-h-30 max-w-30" />
+              <img
+                    src={order.proof_of_payment}
+                    alt="Proof of Payment"
+                    className="h-30 w-30 cursor-pointer rounded-md object-cover transition hover:scale-105"
+                    onClick={() => setPreviewImage(order.proof_of_payment)}
+                  />
             </div>
             <div className="flex gap-4 mt-6">
               {order.status === 'pending' && (
@@ -219,5 +244,6 @@ export default function OrderPage() {
         </div>
       ))}
     </main>
+    </>
   );
 }

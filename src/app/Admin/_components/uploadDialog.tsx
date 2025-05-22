@@ -138,7 +138,7 @@ export function UploadDialog({ onImageUpload }: { onImageUpload?: (imageUrl: str
       <DialogTrigger asChild>
         <Button variant="outline">Upload Image</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="bg-white">
         <DialogHeader>
           <DialogTitle>Upload Image</DialogTitle>
         </DialogHeader>

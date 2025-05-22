@@ -171,12 +171,14 @@ export default function EditPage() {
           ) : (
             <span className="text-gray-300">Drag or Add Pictures</span>
           )}
-          <UploadDialog 
+          <div className="text-black">
+          <UploadDialog
             onImageUpload={(url) => {
               console.log('Setting temp image to:', url);
               setTempImage(url);
             }} 
           />
+          </div>
         </div>
 
         {/* Label */}

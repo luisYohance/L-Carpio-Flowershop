@@ -14,12 +14,12 @@ export function Header() {
         <div className="w-1/3 items-center justify-start" />
 
         {/* Center Logo */}
-        <div className="rounded-m flex w-1/3 justify-center">
-          <img
-            src="/Pictures/Lcarpio-logo.jpg"
-            alt="Logo"
-            className="h-20 object-contain"
-          />
+        <div className="mb-4 flex aspect-square h-32 w-32 items-center justify-center overflow-hidden rounded-full bg-white">
+                <img
+                  src="/Pictures/Lcarpio-logo.jpg"
+                  alt="FlowerShop Logo"
+                  className="h-25 w-25 object-contain"
+                />
         </div>
 
         {/* Right Section */}
