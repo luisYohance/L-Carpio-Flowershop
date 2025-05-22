@@ -64,7 +64,7 @@ export default function LandingPage() {
               </div>
 
               <div className="w-full max-w-md rounded-lg bg-white/90 p-6 text-black shadow-lg">
-                <SignIn />
+                <SignIn routing="hash" />
               </div>
             </SignedOut>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sendEmail } from "~/lib/resend";
 
 interface Order {
   id: number;
@@ -88,6 +89,9 @@ export default function OrderPage() {
         if (data.success == 'false') {
           return;
         }
+        await sendEmail(orders.find(order => order.id === orderId)?.user_email || '', 'Bouquet Order from L\'Carpio\'s Flower Shop', 'Your order has been accepted. Please wait for it to be processed.<br /><br />Your order will be delivered soon.');
+      } else if (newStatus == 'rejected') {
+        await sendEmail(orders.find(order => order.id === orderId)?.user_email || '', 'Bouquet Order from L\'Carpio\'s Flower Shop', 'Unfortunately, your order has been rejected.<br /><br /> Please refer to the contact page if you believe this to be an error.');
       }
     
     try {

@@ -143,7 +143,7 @@ export default function EditPage() {
       currentItem.price = tempPrice;
       currentItem.flowers = tempFlowers;
       currentItem.consumables = tempConsumables;
-      currentItem.doNotDisplay = checked;
+      {/*currentItem.doNotDisplay = checked;*/}
       bouquetRows.set(newRows);
 
       alert("Saved changes!");
@@ -310,7 +310,7 @@ export default function EditPage() {
           </button>
         </div>
 
-        {/* Do Not Display Checkbox */}
+        {/* Do Not Display Checkbox */}{/*
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -319,10 +319,13 @@ export default function EditPage() {
             onChange={(e) => setChecked(e.target.checked)}
             className="w-4 h-4"
           />
+          
           <label htmlFor="hideDisplay" className="text-sm">
             Do not display
           </label>
+          
         </div>
+        */}
       </div>
     </main>
   );
