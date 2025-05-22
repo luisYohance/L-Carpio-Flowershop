@@ -14,7 +14,7 @@ export default function Contact() {
           <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
             Contact Us
           </h1>
-          <p className="text-m text-white md:text-base">User / Contacts</p>
+          <p className="text-m text-white md:text-base">Home / Contacts</p>
         </div>
       </section>
 
@@ -43,7 +43,7 @@ export default function Contact() {
             <h3 className="mb-2 font-semibold tracking-widest text-gray-800">
               PHONE
             </h3>
-            <p className="text-sm leading-tight text-gray-60">0967 360 8776</p>
+            <p className="text-gray-60 text-sm leading-tight">0967 360 8776</p>
           </div>
 
           <div className="rounded-md bg-[#f1f5f4] p-8">
@@ -53,7 +53,9 @@ export default function Contact() {
             <h3 className="mb-2 font-semibold tracking-widest text-gray-800">
               EMAIL ADDRESS
             </h3>
-            <p className="text-sm leading-tight text-gray-60">lcarpiocfs@gmail.com</p>
+            <p className="text-gray-60 text-sm leading-tight">
+              lcarpiocfs@gmail.com
+            </p>
           </div>
         </div>
 

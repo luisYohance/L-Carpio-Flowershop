@@ -13,9 +13,8 @@ export async function POST(req: Request) {
     // }
 
     const body = await req.json();
-    console.log("Add flower request body:", body);
 
-    if (!body.name || typeof body.quantity !== "number" || body.quantity < 0) {
+    if (!body.name || typeof body.image !== "string") {
       return NextResponse.json(
         { error: "Invalid flower data" },
         { status: 400 },
@@ -28,18 +27,13 @@ export async function POST(req: Request) {
       .from(flowers)
       .where(eq(flowers.name, body.name));
 
-    if (existingFlower.length > 0) {
-      // If flower exists, update its quantity
+    if (existingFlower.length > 0 && existingFlower[0]) {
       await db
         .update(flowers)
-        .set({ quantity: existingFlower[0].quantity + body.quantity })
+        .set({ image: body.image })
         .where(eq(flowers.name, body.name));
     } else {
-      // If flower doesn't exist, insert new record
-      await db.insert(flowers).values({
-        name: body.name,
-        quantity: body.quantity,
-      });
+      return NextResponse.json({ error: "Flower not found" }, { status: 404 });
     }
 
     return NextResponse.json({ message: "Flower updated successfully" });

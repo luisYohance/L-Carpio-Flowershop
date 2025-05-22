@@ -39,7 +39,7 @@ export default function Services() {
           <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
             Our Services
           </h1>
-          <p className="text-m text-white md:text-base">User / Services</p>
+          <p className="text-m text-white md:text-base">Home / Services</p>
         </div>
       </section>
 
@@ -50,7 +50,7 @@ export default function Services() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="overflow-hidden rounded-xl border bg-white shadow-md transition-shadow hover:shadow-xl"
+                className="overflow-hidden rounded-xl border bg-zinc-100 shadow-md transition-shadow hover:shadow-xl"
               >
                 <div className="relative h-60 w-full">
                   <Image
@@ -65,7 +65,7 @@ export default function Services() {
                   <h3 className="text-xl font-semibold text-gray-800">
                     {service.title}
                   </h3>
-                  <p className="mt-2 text-sm text-gray-500">
+                  <p className="mt-2 text-sm text-gray-600">
                     {service.description}
                   </p>
                   <button

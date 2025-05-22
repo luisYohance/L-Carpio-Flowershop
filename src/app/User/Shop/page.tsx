@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useCart } from '~/app/context/CartContext';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useCart } from "~/app/context/CartContext";
 
 interface Bouquet {
   id: number;
@@ -31,14 +31,14 @@ export default function ShopPage() {
 
   const loadBouquets = async () => {
     try {
-      const res = await fetch('/api/bouquets/load');
-      if (!res.ok) throw new Error('Failed to fetch bouquets');
+      const res = await fetch("/api/bouquets/load");
+      if (!res.ok) throw new Error("Failed to fetch bouquets");
       const data = await res.json();
       setRows(data);
       setError(null);
     } catch (err) {
-      console.error('Error loading bouquets:', err);
-      setError('Failed to load bouquets. Please try again later.');
+      console.error("Error loading bouquets:", err);
+      setError("Failed to load bouquets. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -51,8 +51,8 @@ export default function ShopPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 p-8">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Loading bouquets...</h1>
+        <div className="mx-auto max-w-7xl text-center">
+          <h1 className="mb-8 text-3xl font-bold">Loading bouquets...</h1>
         </div>
       </div>
     );
@@ -61,83 +61,124 @@ export default function ShopPage() {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-100 p-8">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8 text-red-600">{error}</h1>
+        <div className="mx-auto max-w-7xl">
+          <h1 className="mb-8 text-3xl font-bold text-red-600">{error}</h1>
         </div>
       </div>
     );
   }
 
   return (
-<>
-<section
+    <>
+      {/* Banner Section */}
+      <section
         className="relative h-[200px] bg-cover bg-center opacity-90"
         style={{ backgroundImage: 'url("/Pictures/Banner-1.jpg")' }}
       >
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-4 text-center">
           <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
-            Our Bouquets
+            Shop
           </h1>
-          <p className="text-m text-white md:text-base">User / Shop</p>
+          <p className="text-m text-white md:text-base">Home / Shop</p>
         </div>
       </section>
 
-<div className="min-h-screen bg-gray-100 p-8">
-      
-      <div className="max-w-7xl mx-auto">
-        <p className="text-gray-800 m-2">All bouquets listed below are pre-made and ready for purchase.
-          <br />
-          Please refer to the <a href="/User/Contacts" className="text-blue-500 hover:underline">Contacts page</a> if you are interested in a custom bouquet.
-        </p>
-        {rows.map((row) => (
-          <div key={row.id} className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6">{row.title}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {row.items.map((bouquet) => (
-                <div key={bouquet.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={bouquet.image}
-                      alt={bouquet.label}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2">{bouquet.label}</h3>
-                    <p className="text-gray-600 mb-2">₱{bouquet.price.toFixed(2)}</p>
-                    <div className="mb-4">
-                      <h4 className="text-sm font-medium mb-1">Flowers:</h4>
-                      <ul className="text-sm text-gray-600">
-                        {Object.entries(bouquet.flowers).map(([flower, quantity]) => (
-                          <li key={flower}>
-                            {flower} ({quantity})
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="mb-4">
-                      <h4 className="text-sm font-medium mb-1">Includes:</h4>
-                      <ul className="text-sm text-gray-600">
-                        {bouquet.consumables.map((consumable) => (
-                          <li key={consumable}>{consumable}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <button
-                      onClick={() => handleAddToCart(bouquet)}
-                      className="w-full bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-700 transition-colors"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+      {/* Main Container */}
+      <div className="min-h-screen bg-gray-100 p-8 font-sans">
+        <div className="mx-auto max-w-6xl">
+          {/* Info Container */}
+          <div className="mb-8 rounded-lg bg-white p-4 shadow-md">
+            <p className="text-gray-800">
+              All bouquets listed below are pre-made and ready for purchase.
+              <br />
+              Please refer to the{" "}
+              <a
+                href="/User/Contacts"
+                className="text-blue-500 hover:underline"
+              >
+                Contacts page
+              </a>{" "}
+              if you are interested in a custom bouquet.
+            </p>
           </div>
-        ))}
+
+          {/* Row Mapping */}
+          {rows.map((row) => (
+            <div key={row.id} className="mb-12">
+              {/* Row Title with semi-transparent background */}
+              <div className="relative mb-6 overflow-hidden rounded-md text-center text-2xl font-semibold text-white">
+                {/* Background Image Layer */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-90"
+                  style={{ backgroundImage: 'url("/Pictures/Banner-5.jpg")' }}
+                  aria-hidden="true"
+                />
+                {/* Foreground Text */}
+                <div className="relative z-10 px-6 py-4">{row.title}</div>
+              </div>
+
+              {/* Bouquets Grid */}
+              <div className="grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+                {row.items.map((bouquet) => (
+                  <div
+                    key={bouquet.id}
+                    className="w-[280px] rounded-lg bg-white shadow-md transition-transform hover:scale-105"
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={bouquet.image}
+                        alt={bouquet.label}
+                        fill
+                        className="rounded-t-lg object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="mb-2 text-lg font-semibold">
+                        {bouquet.label}
+                      </h3>
+                      <p className="mb-2 text-gray-600">
+                        ₱{bouquet.price.toFixed(2)}
+                      </p>
+
+                      {/* Flowers List */}
+                      <div className="mb-3">
+                        <h4 className="text-sm font-medium">Flowers:</h4>
+                        <ul className="text-sm text-gray-600">
+                          {Object.entries(bouquet.flowers).map(
+                            ([flower, quantity]) => (
+                              <li key={flower}>
+                                {flower} ({quantity})
+                              </li>
+                            ),
+                          )}
+                        </ul>
+                      </div>
+
+                      {/* Consumables List */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-medium">Includes:</h4>
+                        <ul className="text-sm text-gray-600">
+                          {bouquet.consumables.map((consumable) => (
+                            <li key={consumable}>{consumable}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Add to Cart Button */}
+                      <button
+                        onClick={() => handleAddToCart(bouquet)}
+                        className="w-full rounded bg-pink-600 px-4 py-2 text-white transition-colors hover:bg-pink-700"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-</>
+    </>
   );
 }

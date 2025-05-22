@@ -13,12 +13,12 @@ export default function WeddingPage() {
             Wedding Arrangements
           </h1>
           <p className="text-m text-white md:text-base">
-            User / Services / Wedding Arrangements
+            Home / Services / Wedding Arrangements
           </p>
         </div>
       </section>
 
-      <div className="mx-auto max-w-5xl space-y-12 px-4 py-12">
+      <div className="mx-auto max-w-5xl space-y-12 bg-zinc-50 px-4 py-12">
         <div className="text-center">
           <h1 className="text-2xl font-semibold tracking-widest uppercase">
             Wedding Arrangements

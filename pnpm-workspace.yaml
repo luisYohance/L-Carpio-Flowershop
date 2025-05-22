@@ -1,4 +1,8 @@
 onlyBuiltDependencies:
+  - '@clerk/shared'
   - esbuild
   - sharp
   - unrs-resolver
+
+ignoredBuiltDependencies:
+  - msgpackr-extract

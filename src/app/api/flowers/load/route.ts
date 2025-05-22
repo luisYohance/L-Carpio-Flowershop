@@ -14,7 +14,10 @@ export async function GET() {
     const flowerList = await db.select().from(flowers);
     return NextResponse.json(flowerList);
   } catch (error) {
-    console.error('Error loading flowers:', error);
-    return NextResponse.json({ error: 'Failed to load flowers' }, { status: 500 });
+    console.error("Error loading flowers:", error);
+    return NextResponse.json(
+      { error: "Failed to load flowers" },
+      { status: 500 },
+    );
   }
-} 
+}

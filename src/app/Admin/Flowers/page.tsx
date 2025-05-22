@@ -1,10 +1,13 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
+import { UploadDialog } from "../_components/uploadDialog";
 
 export default function FlowersPage() {
-  const [flowerList, setFlowerList] = useState<{ id: number; name: string; quantity: number }[]>([]);
-  const [newFlower, setNewFlower] = useState({ name: '', quantity: 0 });
+  const [flowerList, setFlowerList] = useState<
+    { id: number; name: string; quantity: number; image: string }[]
+  >([]);
+  const [newFlower, setNewFlower] = useState({ name: "", quantity: 0 });
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -41,12 +44,36 @@ export default function FlowersPage() {
       alert(data.message);
 
       if (!res.ok) throw new Error("Failed to add flower");
-      
-      setNewFlower({ name: '', quantity: 0 });
+
+      setNewFlower({ name: "", quantity: 0 });
       await loadFlowers();
     } catch (err) {
       console.error("Error adding flower:", err);
       alert("Failed to add flower. Please try again.");
+    }
+  };
+
+  const changeImage = async (name: string, image: string) => {
+    if (!name || !image) {
+      alert("Please enter a valid flower name and quantity");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/flowers/changeImage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: name, image: image }),
+      });
+      const data = await res.json();
+      alert(data.message);
+      if (!res.ok) throw new Error("Failed to change image");
+      await loadFlowers();
+    } catch (err) {
+      console.error("Error changing image:", err);
+      alert("Failed to change image. Please try again.");
     }
   };
 
@@ -64,10 +91,10 @@ export default function FlowersPage() {
         },
         body: JSON.stringify(newFlower),
       });
-const data = await res.json();
+      const data = await res.json();
       alert(data.message);
       if (!res.ok) throw new Error("Failed to take flower");
-      setNewFlower({ name: '', quantity: 0 });
+      setNewFlower({ name: "", quantity: 0 });
       await loadFlowers();
     } catch (err) {
       console.error("Error taking flower:", err);
@@ -88,7 +115,7 @@ const data = await res.json();
       });
 
       if (!res.ok) throw new Error("Failed to delete flower");
-      
+
       await loadFlowers();
     } catch (err) {
       console.error("Error deleting flower:", err);
@@ -100,7 +127,7 @@ const data = await res.json();
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-100">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
+          <h2 className="mb-4 text-2xl font-bold text-red-600">Error</h2>
           <p className="text-gray-700">{error}</p>
         </div>
       </div>
@@ -108,38 +135,46 @@ const data = await res.json();
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100 text-gray-900 p-6 bg-gradient-to-b from-[#454446] to-[#1d1d22]">
-      <div className="w-full max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-white">Flower Management</h1>
-        
+    <div className="flex min-h-screen bg-gray-100 bg-gradient-to-b from-[#454446] to-[#1d1d22] p-6 text-gray-900">
+      <div className="mx-auto w-full max-w-4xl">
+        <h1 className="mb-8 text-3xl font-bold text-white">
+          Flower Management
+        </h1>
+
         {/* Add new flower form */}
-        <div className="bg-gray-500 p-6 rounded-lg shadow-md mb-8">
-          <h2 className="text-white text-xl font-semibold mb-4">Add New Flower</h2>
+        <div className="mb-8 rounded-lg bg-gray-500 p-6 shadow-md">
+          <h2 className="mb-4 text-xl font-semibold text-white">
+            Add New Flower
+          </h2>
           <div className="flex gap-4">
             <input
               type="text"
               value={newFlower.name}
-              onChange={(e) => setNewFlower({ ...newFlower, name: e.target.value })}
+              onChange={(e) =>
+                setNewFlower({ ...newFlower, name: e.target.value })
+              }
               placeholder="Flower name"
-              className="flex-1 p-2 border rounded bg-white"
+              className="flex-1 rounded border bg-white p-2"
             />
             <input
               type="number"
               value={newFlower.quantity}
-              onChange={(e) => setNewFlower({ ...newFlower, quantity: Number(e.target.value) })}
+              onChange={(e) =>
+                setNewFlower({ ...newFlower, quantity: Number(e.target.value) })
+              }
               placeholder="Quantity"
               min="0"
-              className="w-32 p-2 border rounded bg-white"
+              className="w-32 rounded border bg-white p-2"
             />
             <button
               onClick={addFlower}
-              className="bg-gray-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded"
+              className="rounded bg-gray-700 px-4 py-2 font-semibold text-white hover:bg-green-800"
             >
               Add Flower
             </button>
             <button
               onClick={takeFlower}
-              className="bg-gray-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded"
+              className="rounded bg-gray-700 px-4 py-2 font-semibold text-white hover:bg-green-800"
             >
               Take Flower
             </button>
@@ -147,24 +182,36 @@ const data = await res.json();
         </div>
 
         {/* Flower list */}
-        <div className="bg-gray-500 p-6 rounded-lg shadow-md">
-          <h2 className="text-white text-xl font-semibold mb-4">Flower List</h2>
+        <div className="rounded-lg bg-gray-500 p-6 shadow-md">
+          <h2 className="mb-4 text-xl font-semibold text-white">Flower List</h2>
           <div className="space-y-4">
             {flowerList.map((flower) => (
               <div
                 key={flower.name}
-                className="bg-white flex items-center justify-between p-4 border rounded hover:bg-gray-50"
+                className="flex items-center justify-between rounded border bg-white p-4 hover:bg-gray-50"
               >
                 <div>
                   <h3 className="font-medium">{flower.name}</h3>
                   <p className="text-gray-600">Quantity: {flower.quantity}</p>
+                  <p className="text-gray-600">Image:</p>
+                  <img
+                    src={flower.image}
+                    alt={`Image of ${flower.name}`}
+                    className="h-20 w-20"
+                  />
                 </div>
                 <button
                   onClick={() => deleteFlower(flower.name)}
-                  className="bg-gray-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded"
+                  className="rounded bg-gray-700 px-4 py-2 font-semibold text-white hover:bg-green-800"
                 >
                   Delete
                 </button>
+                <UploadDialog
+                  onImageUpload={(url) => {
+                    console.log("Setting flower image to:", url);
+                    changeImage(flower.name, url);
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -172,4 +219,4 @@ const data = await res.json();
       </div>
     </div>
   );
-} 
+}
